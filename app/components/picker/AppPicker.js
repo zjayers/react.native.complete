@@ -1,6 +1,6 @@
 // - Imports
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import React, { useState } from "react";
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import React, { useState } from 'react';
 import {
   Button,
   FlatList,
@@ -8,13 +8,12 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   View,
-} from "react-native";
-import { colors } from "../../theme/colors";
-import { fontStyle } from "../../theme/font";
-import AppText from "../shared/AppText";
-import ListItemSeparator from "../list-item/ListItemSeparator";
-import PickerItem from "./PickerItem";
-import SafeArea from "../SafeArea";
+} from 'react-native';
+import { colors } from '../../theme/colors';
+import { fontStyle } from '../../theme/font';
+import SafeArea from '../SafeArea';
+import AppText from '../shared/AppText';
+import PickerItem from './PickerItem';
 
 /**
  * App Picker Component
@@ -28,7 +27,7 @@ const AppPicker = ({
   PickerItemComponent = PickerItem,
   selectedItem,
   onSelectItem,
-  width = "100%",
+  width = '100%',
 }) => {
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -57,15 +56,15 @@ const AppPicker = ({
             {selectedItem ? selectedItem.label : placeholder}
           </AppText>
           <MaterialCommunityIcons
-            name={"chevron-down"}
+            name="chevron-down"
             size={20}
             color={colors.mediumGray}
           />
         </View>
       </TouchableWithoutFeedback>
-      <Modal visible={modalVisible} animationType={"slide"}>
+      <Modal visible={modalVisible} animationType="slide">
         <SafeArea>
-          <Button title={"Close"} onPress={() => setModalVisible(false)} />
+          <Button title="Close" onPress={() => setModalVisible(false)} />
           <FlatList
             data={items}
             style={styles.list}
@@ -92,7 +91,7 @@ const styles = StyleSheet.create({
   baseContainer: {
     backgroundColor: colors.lightGray,
     borderRadius: 25,
-    flexDirection: "row",
+    flexDirection: 'row',
     padding: 15,
     marginVertical: 10,
   },
@@ -107,7 +106,7 @@ const styles = StyleSheet.create({
   },
   list: {
     flex: 1,
-    width: "100%",
+    width: '100%',
     marginTop: 20,
   },
 });

@@ -1,8 +1,8 @@
 // - Imports
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import React from "react";
-import { Image, StyleSheet, View } from "react-native";
-import { colors } from "../theme/colors";
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import React from 'react';
+import { Image, StyleSheet, View } from 'react-native';
+import { colors } from '../theme/colors';
 
 /**
  * ViewImageScreen Component
@@ -15,22 +15,22 @@ const ViewImageScreen = (props) => {
     <View style={styles.imageContainer}>
       <View style={styles.closeIcon}>
         <MaterialCommunityIcons
-          name={"close"}
+          name="close"
           color={colors.white}
           size={iconSize}
         />
       </View>
       <View style={styles.deleteIcon}>
         <MaterialCommunityIcons
-          name={"trash-can-outline"}
+          name="trash-can-outline"
           color={colors.white}
           size={iconSize}
         />
       </View>
       <Image
-        source={require("../assets/img/chair.jpg")}
+        source={require('../assets/img/chair.jpg')}
         style={styles.image}
-        resizeMode={"contain"}
+        resizeMode="contain"
       />
     </View>
   );
@@ -39,12 +39,12 @@ const ViewImageScreen = (props) => {
 // - Styles
 const styles = StyleSheet.create({
   closeIcon: {
-    position: "absolute",
+    position: 'absolute',
     top: 40,
     left: 30,
   },
   deleteIcon: {
-    position: "absolute",
+    position: 'absolute',
     top: 40,
     right: 30,
   },
@@ -53,8 +53,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   image: {
-    width: "100%",
-    height: "100%",
+    width: '100%',
+    height: '100%',
   },
 });
 

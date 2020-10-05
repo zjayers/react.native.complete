@@ -1,30 +1,30 @@
 // - Imports
-import React, { useState } from "react";
-import { FlatList, StyleSheet } from "react-native";
+import React, { useState } from 'react';
+import { FlatList, StyleSheet } from 'react-native';
 
-import ListItem from "../components/list-item/ListItem";
-import ListItemDeleteAction from "../components/list-item/ListItemDeleteAction";
-import ListItemSeparator from "../components/list-item/ListItemSeparator";
-import SafeArea from "../components/SafeArea";
+import ListItem from '../components/list-item/ListItem';
+import ListItemDeleteAction from '../components/list-item/ListItemDeleteAction';
+import ListItemSeparator from '../components/list-item/ListItemSeparator';
+import SafeArea from '../components/SafeArea';
 
 const messageRepo = [
   {
     id: 1,
-    title: "T1",
-    description: "D1",
-    image: require("../assets/img/mosh.jpg"),
+    title: 'T1',
+    description: 'D1',
+    image: require('../assets/img/user.jpg'),
   },
   {
     id: 2,
-    title: "T2",
-    description: "D2",
-    image: require("../assets/img/mosh.jpg"),
+    title: 'T2',
+    description: 'D2',
+    image: require('../assets/img/user.jpg'),
   },
   {
     id: 3,
-    title: "T3",
-    description: "D3",
-    image: require("../assets/img/mosh.jpg"),
+    title: 'T3',
+    description: 'D3',
+    image: require('../assets/img/user.jpg'),
   },
 ];
 
@@ -32,7 +32,7 @@ const messageRepo = [
  * MessagesScreen Component
  * @returns {JSX.Element} - JSX to be rendered to the screen
  */
-const MessagesScreen = (props) => {
+const MessagesScreen = () => {
   const [messages, setMessages] = useState(messageRepo);
   const [refreshing, setRefreshing] = useState(false);
 
@@ -61,7 +61,7 @@ const MessagesScreen = (props) => {
             title={item.title}
             subTitle={item.description}
             onPress={() => {
-              console.log("Tapped: ", item);
+              console.log('Tapped: ', item);
             }}
             rightActions={() => (
               <ListItemDeleteAction

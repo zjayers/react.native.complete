@@ -1,29 +1,41 @@
 // - Imports
-import React from "react";
-import { Image, StyleSheet, View } from "react-native";
-import AppText from "../components/shared/AppText";
-import ListItem from "../components/list-item/ListItem";
-import { colors } from "../theme/colors";
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+import { Image } from 'react-native-expo-image-cache';
+import ListItem from '../components/list-item/ListItem';
+import AppButton from '../components/shared/AppButton';
+import AppText from '../components/shared/AppText';
+import { colors } from '../theme/colors';
 
 /**
  * ListingDetailsScreen Component
  * @returns {JSX.Element} - JSX to be rendered to the screen
  */
-const ListingDetailsScreen = (props) => {
+const ListingDetailsScreen = ({ route }) => {
+  const { images, title, price } = route.params;
+
   return (
     <View style={styles.baseContainer}>
       <Image
-        source={require("../assets/img/jacket.jpg")}
+        uri={images[0].url}
+        preview={{ uri: images[0].thumbnailUrl }}
+        tint="light"
         style={styles.image}
       />
       <View style={styles.detailsContainer}>
-        <AppText style={styles.title}>Red Jacket</AppText>
-        <AppText style={styles.price}>$100</AppText>
+        <AppText style={styles.title}>{title}</AppText>
+        <AppText style={styles.price}>
+          $
+          {price}
+        </AppText>
+        <View style={styles.buttonContainer}>
+          <AppButton title="Add to cart" />
+        </View>
         <View style={styles.userContainer}>
           <ListItem
-            image={require("../assets/img/mosh.jpg")}
-            title={"Mosh Hamedani"}
-            subTitle={"5 Listing"}
+            image={require('../assets/img/user.jpg')}
+            title="John Smith"
+            subTitle="5 Listing"
           />
         </View>
       </View>
@@ -38,21 +50,24 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   image: {
-    width: "100%",
+    width: '100%',
     height: 300,
   },
   title: {
     fontSize: 24,
-    fontWeight: "500",
+    fontWeight: '500',
+  },
+  buttonContainer: {
+    marginTop: 10,
   },
   price: {
     color: colors.secondary,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     fontSize: 20,
     marginVertical: 10,
   },
   userContainer: {
-    marginVertical: 40,
+    marginVertical: 10,
   },
 });
 

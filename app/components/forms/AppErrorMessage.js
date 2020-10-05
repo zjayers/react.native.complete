@@ -1,8 +1,9 @@
 // - Imports
-import React from "react";
-import { StyleSheet } from "react-native";
-import { colors } from "../../theme/colors";
-import AppText from "../shared/AppText";
+import PropTypes from 'prop-types';
+import React from 'react';
+import { StyleSheet } from 'react-native';
+import { colors } from '../../theme/colors';
+import AppText from '../shared/AppText';
 
 /**
  * ErrorMessage Component
@@ -17,7 +18,6 @@ const AppErrorMessage = ({ error, visible }) => {
 // - Styles
 const styles = StyleSheet.create({
   errorText: {
-    marginLeft: 20,
     color: colors.danger,
   },
 });

@@ -1,10 +1,10 @@
-import { Platform } from "react-native";
+import { Platform } from 'react-native';
 
 export const fontStyle = Platform.select({
   ios: {
-    fontFamily: "Avenir",
+    fontFamily: 'Avenir',
   },
   android: {
-    fontFamily: "Roboto",
+    fontFamily: 'Roboto',
   },
 });

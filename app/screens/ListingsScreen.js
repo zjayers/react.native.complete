@@ -1,40 +1,55 @@
 // - Imports
-import React from "react";
-import { FlatList, StyleSheet } from "react-native";
-import AppCard from "../components/shared/AppCard";
-import SafeArea from "../components/SafeArea";
-import { colors } from "../theme/colors";
-
-const mockListings = [
-  {
-    id: 1,
-    title: "Red Jacket",
-    price: "$400",
-    image: require("../assets/img/jacket.jpg"),
-  },
-  {
-    id: 2,
-    title: "Couch",
-    price: "$1000",
-    image: require("../assets/img/couch.jpg"),
-  },
-];
+import React, { useEffect } from 'react';
+import { FlatList, StyleSheet, View } from 'react-native';
+import listingsApi from '../api/listings';
+import AppActivityIndicator from '../components/animated/AppActivityIndicator';
+import SafeArea from '../components/SafeArea';
+import AppButton from '../components/shared/AppButton';
+import AppCard from '../components/shared/AppCard';
+import AppText from '../components/shared/AppText';
+import useApi from '../hooks/useApi';
+import routes from '../navigation/routes';
+import { colors } from '../theme/colors';
 
 /**
  * ListingsScreen Component
  * @returns {JSX.Element} - JSX to be rendered to the screen
  */
-const ListingsScreen = (props) => {
+const ListingsScreen = ({ navigation }) => {
+  const { request: loadListings, data, loading, error } = useApi(
+    listingsApi.getListings
+  );
+
+  useEffect(() => {
+    loadListings();
+  }, []);
+
   return (
     <SafeArea style={styles.baseContainer}>
+      {error && (
+        <>
+          <AppText style={styles.error}>
+            Could not retrieve the listings.
+          </AppText>
+          <AppButton title="Retry" onPress={loadListings} />
+        </>
+      )}
+      <AppActivityIndicator visible={loading} />
+
       <FlatList
-        data={mockListings}
+        data={data}
+        refreshing
+        showsVerticalScrollIndicator={false}
+        ListHeaderComponent={<View style={styles.topSpacer} />}
         keyExtractor={(listing) => listing.id.toString()}
         renderItem={({ item }) => (
           <AppCard
             title={item.title}
             subTitle={item.price}
-            image={item.image}
+            imageUrl={item.images[0].url}
+            D
+            thumbnailUrl={item.images[0].thumbnailUrl}
+            onPress={() => navigation.navigate(routes.LISTING_DETAILS, item)}
           />
         )}
       />
@@ -45,8 +60,16 @@ const ListingsScreen = (props) => {
 // - Styles
 const styles = StyleSheet.create({
   baseContainer: {
-    padding: 20,
+    paddingHorizontal: 20,
     backgroundColor: colors.lightGray,
+  },
+  topSpacer: {
+    height: 20,
+  },
+  error: {
+    fontSize: 18,
+    marginBottom: 20,
+    alignSelf: 'center',
   },
   primaryText: {
     fontSize: 30,
