@@ -9,10 +9,10 @@ import AppText from '../shared/AppText';
  * ErrorMessage Component
  * @returns {JSX.Element} - JSX to be rendered to the screen
  */
-const AppErrorMessage = ({ error, visible }) => {
+const AppErrorMessage = ({ error, visible, style }) => {
   if (!error || !visible) return null;
 
-  return <AppText style={styles.errorText}>{error}</AppText>;
+  return <AppText style={[styles.errorText, style]}>{error}</AppText>;
 };
 
 // - Styles

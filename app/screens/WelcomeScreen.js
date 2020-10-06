@@ -1,12 +1,7 @@
 // - Imports
 import React from 'react';
 import {
-  Image,
-  ImageBackground,
-  Platform,
-  StyleSheet,
-  Text,
-  View,
+  Image, ImageBackground, Platform, StyleSheet, View,
 } from 'react-native';
 import AppButton from '../components/shared/AppButton';
 import routes from '../navigation/routes';
@@ -26,7 +21,7 @@ const WelcomeScreen = ({ navigation }) => (
         source={require('../assets/img/logo-red.png')}
         style={styles.logo}
       />
-      <Text style={styles.tagLine}>Sell What You Don't Need</Text>
+      {/* <Image style={styles.tagLine} source={require('../assets/img/tagLine.png')} /> */}
     </View>
     <View style={styles.buttonsContainer}>
       <AppButton
@@ -58,16 +53,12 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 70,
     alignItems: 'center',
+    width: '100%',
   },
   logo: {
     width: 100,
     height: 100,
-  },
-  tagLine: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    paddingVertical: 20,
-    fontStyle: 'italic',
+    top: 40,
   },
   buttonsContainer: {
     padding: 20,

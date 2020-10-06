@@ -38,9 +38,7 @@ const MessagesScreen = () => {
 
   const handleMessageDelete = (clickedMessage) => {
     // Delete the message from the messages array
-    setMessages((messages) =>
-      messages.filter((m) => m.id !== clickedMessage.id)
-    );
+    setMessages((prevMessages) => prevMessages.filter((m) => m.id !== clickedMessage.id));
     // Call the server to delete the message from there as well
   };
 

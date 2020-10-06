@@ -1,5 +1,5 @@
 // - Imports
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
 import listingsApi from '../api/listings';
 import AppActivityIndicator from '../components/animated/AppActivityIndicator';
@@ -16,8 +16,12 @@ import { colors } from '../theme/colors';
  * @returns {JSX.Element} - JSX to be rendered to the screen
  */
 const ListingsScreen = ({ navigation }) => {
-  const { request: loadListings, data, loading, error } = useApi(
-    listingsApi.getListings
+  const [refreshing, setRefreshing] = useState(false);
+
+  const {
+    request: loadListings, data, loading, error,
+  } = useApi(
+    listingsApi.getListings,
   );
 
   useEffect(() => {
@@ -25,35 +29,38 @@ const ListingsScreen = ({ navigation }) => {
   }, []);
 
   return (
-    <SafeArea style={styles.baseContainer}>
-      {error && (
-        <>
-          <AppText style={styles.error}>
-            Could not retrieve the listings.
-          </AppText>
-          <AppButton title="Retry" onPress={loadListings} />
-        </>
-      )}
+    <>
       <AppActivityIndicator visible={loading} />
-
-      <FlatList
-        data={data}
-        refreshing
-        showsVerticalScrollIndicator={false}
-        ListHeaderComponent={<View style={styles.topSpacer} />}
-        keyExtractor={(listing) => listing.id.toString()}
-        renderItem={({ item }) => (
-          <AppCard
-            title={item.title}
-            subTitle={item.price}
-            imageUrl={item.images[0].url}
-            D
-            thumbnailUrl={item.images[0].thumbnailUrl}
-            onPress={() => navigation.navigate(routes.LISTING_DETAILS, item)}
-          />
+      <SafeArea style={styles.baseContainer}>
+        {error && (
+          <>
+            <AppText style={styles.error}>
+              Could not retrieve the listings.
+            </AppText>
+            <AppButton title="Retry" onPress={loadListings} />
+          </>
         )}
-      />
-    </SafeArea>
+
+        <FlatList
+          data={data}
+          refreshing={refreshing}
+          onRefresh={loadListings}
+          showsVerticalScrollIndicator={false}
+          ListHeaderComponent={<View style={styles.topSpacer} />}
+          keyExtractor={(listing) => listing.id.toString()}
+          renderItem={({ item }) => (
+            <AppCard
+              title={item.title}
+              subTitle={item.price}
+              imageUrl={item.images[0].url}
+              D
+              thumbnailUrl={item.images[0].thumbnailUrl}
+              onPress={() => navigation.navigate(routes.LISTING_DETAILS, item)}
+            />
+          )}
+        />
+      </SafeArea>
+    </>
   );
 };
 
