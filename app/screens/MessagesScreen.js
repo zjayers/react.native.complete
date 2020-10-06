@@ -6,25 +6,26 @@ import ListItem from '../components/list-item/ListItem';
 import ListItemDeleteAction from '../components/list-item/ListItemDeleteAction';
 import ListItemSeparator from '../components/list-item/ListItemSeparator';
 import SafeArea from '../components/SafeArea';
+import logger from '../utils/logger';
 
 const messageRepo = [
   {
     id: 1,
     title: 'T1',
     description: 'D1',
-    image: require('../assets/img/user.jpg'),
+    image: require('../assets/user.jpg'),
   },
   {
     id: 2,
     title: 'T2',
     description: 'D2',
-    image: require('../assets/img/user.jpg'),
+    image: require('../assets/user.jpg'),
   },
   {
     id: 3,
     title: 'T3',
     description: 'D3',
-    image: require('../assets/img/user.jpg'),
+    image: require('../assets/user.jpg'),
   },
 ];
 
@@ -59,7 +60,7 @@ const MessagesScreen = () => {
             title={item.title}
             subTitle={item.description}
             onPress={() => {
-              console.log('Tapped: ', item);
+              logger.log('Tapped: ', item);
             }}
             rightActions={() => (
               <ListItemDeleteAction

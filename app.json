@@ -1,8 +1,14 @@
 {
   "expo": {
-    "name": "react.native.complete",
-    "slug": "complete",
+    "name": "DoneWithIt",
+    "slug": "DoneWithIts",
     "version": "1.0.0",
+    "privacy": "unlisted",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
     "orientation": "portrait",
     "icon": "./app/assets/icon.png",
     "splash": {
@@ -17,10 +23,15 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.ayers.donewithit",
+      "buildNumber": "1.0.0"
     },
     "web": {
       "favicon": "./app/assets/favicon.png"
+    },
+    "notification": {
+      "iosDisplayInForeground": true
     }
   }
 }

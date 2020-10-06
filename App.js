@@ -5,8 +5,13 @@ import OfflineNotice from './app/components/shared/OfflineNotice';
 import AuthContext from './app/context/AuthContext';
 import AppNavigator from './app/navigation/AppNavigator';
 import AuthNavigator from './app/navigation/AuthNavigator';
+import { navigationRef } from './app/navigation/rootNavigation';
 import navigationTheme from './app/theme/navigationTheme';
 import authStorage from './app/utils/authStorage';
+import logger from './app/utils/logger';
+
+// Start Logger - No API key has been provided so the line is commented out
+// logger.start();
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -14,7 +19,7 @@ export default function App() {
 
   const restoreUser = async () => {
     const restoredUser = await authStorage.getUser();
-    if (restoredUser) setUser(user);
+    if (restoredUser) setUser(restoredUser);
   };
 
   if (!appReady) return <AppLoading startAsync={restoreUser} onFinish={() => setAppReady(true)} />;
@@ -22,7 +27,7 @@ export default function App() {
   return (
     <AuthContext.Provider value={{ user, setUser }}>
       <OfflineNotice />
-      <NavigationContainer theme={navigationTheme}>
+      <NavigationContainer ref={navigationRef} theme={navigationTheme}>
         {user ? <AppNavigator /> : <AuthNavigator />}
       </NavigationContainer>
     </AuthContext.Provider>

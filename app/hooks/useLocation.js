@@ -1,5 +1,6 @@
 import * as Location from 'expo-location';
 import { useEffect, useState } from 'react';
+import logger from '../utils/logger';
 
 export const useLocation = () => {
   const [location, setLocation] = useState(null);
@@ -17,7 +18,7 @@ export const useLocation = () => {
       } = await Location.getLastKnownPositionAsync();
       setLocation({ latitude, longitude });
     } catch (e) {
-      console.log('Error Getting Location');
+      logger.log('Error Getting Location');
     }
   };
 

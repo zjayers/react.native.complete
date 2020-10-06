@@ -3,13 +3,10 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import React, { useEffect } from 'react';
 import {
-  Alert,
-  Image,
-  StyleSheet,
-  TouchableWithoutFeedback,
-  View,
+  Alert, Image, StyleSheet, TouchableWithoutFeedback, View,
 } from 'react-native';
 import { colors } from '../../theme/colors';
+import logger from '../../utils/logger';
 
 /**
  * ImageInput Component
@@ -26,8 +23,7 @@ const ImageInput = ({ imageUri, onChangeImage }) => {
    */
   const requestCameraRollPermission = async () => {
     const { granted } = await ImagePicker.requestCameraRollPermissionsAsync();
-    if (!granted)
-      alert('You must enable permission to access the photo library.');
+    if (!granted) alert('You must enable permission to access the photo library.');
   };
 
   /**
@@ -62,7 +58,7 @@ const ImageInput = ({ imageUri, onChangeImage }) => {
         onChangeImage(result.uri);
       }
     } catch (e) {
-      console.log('Error Reading Image');
+      logger.log('Error Reading Image');
     }
   };
 

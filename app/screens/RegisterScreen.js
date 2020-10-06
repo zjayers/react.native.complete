@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import * as Yup from 'yup';
+import authApi from '../api/auth';
 import users from '../api/users';
 import AppActivityIndicator from '../components/animated/AppActivityIndicator';
-import SafeArea from '../components/SafeArea';
 import {
   AppErrorMessage, AppForm, AppFormField, AppSubmitButton,
 } from '../components/forms';
-import usersApi from '../api/users';
-import authApi from '../api/auth';
+import SafeArea from '../components/SafeArea';
 import useApi from '../hooks/useApi';
 import useAuth from '../hooks/useAuth';
+import logger from '../utils/logger';
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required().label('Name'),
@@ -31,7 +31,7 @@ const RegisterScreen = () => {
       if (result.data) setError(result.data.error);
       else {
         setError('An unexpected error occured.');
-        console.log(result);
+        logger.log(result);
       }
       return;
     }

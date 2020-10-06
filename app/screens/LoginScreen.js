@@ -34,7 +34,7 @@ const LoginScreen = () => {
 
   return (
     <SafeArea style={styles.baseContainer}>
-      <Image style={styles.logo} source={require('../assets/img/logo-red.png')} />
+      <Image style={styles.logo} source={require('../assets/logo-red.png')} />
       <AppErrorMessage style={styles.errorMsg} error="Invalid email and/or password." visible={loginFailed} />
       <AppForm
         initialValues={{ email: '', password: '' }}

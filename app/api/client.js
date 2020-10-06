@@ -1,9 +1,10 @@
 import { create } from 'apisauce';
 import authStorage from '../utils/authStorage';
 import cache from '../utils/cache';
+import settings from '../config/settings';
 
 const apiClient = create({
-  baseURL: 'http://127.0.0.1:9000/api',
+  baseURL: settings.apiUrl,
 });
 
 // Transform API client to include authentication token

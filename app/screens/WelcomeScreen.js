@@ -13,15 +13,15 @@ import routes from '../navigation/routes';
 const WelcomeScreen = ({ navigation }) => (
   <ImageBackground
     blurRadius={Platform.OS === 'android' ? 1.75 : 7}
-    source={require('../assets/img/background.jpg')}
+    source={require('../assets/background.jpg')}
     style={styles.imageBackground}
   >
     <View style={styles.logoContainer}>
       <Image
-        source={require('../assets/img/logo-red.png')}
+        source={require('../assets/logo-red.png')}
         style={styles.logo}
       />
-      {/* <Image style={styles.tagLine} source={require('../assets/img/tagLine.png')} /> */}
+      <Image style={styles.tagLine} source={require('../assets/tagLine.png')} />
     </View>
     <View style={styles.buttonsContainer}>
       <AppButton
@@ -59,6 +59,11 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     top: 40,
+  },
+  tagLine: {
+    width: 300,
+    height: 40,
+    top: 80,
   },
   buttonsContainer: {
     padding: 20,

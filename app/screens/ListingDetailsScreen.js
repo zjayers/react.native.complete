@@ -1,9 +1,11 @@
 // - Imports
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import {
+  KeyboardAvoidingView, Platform, ScrollView, StyleSheet, View,
+} from 'react-native';
 import { Image } from 'react-native-expo-image-cache';
+import ContactSellerForm from '../components/forms/ContactSellerForm';
 import ListItem from '../components/list-item/ListItem';
-import AppButton from '../components/shared/AppButton';
 import AppText from '../components/shared/AppText';
 import { colors } from '../theme/colors';
 
@@ -12,34 +14,39 @@ import { colors } from '../theme/colors';
  * @returns {JSX.Element} - JSX to be rendered to the screen
  */
 const ListingDetailsScreen = ({ route }) => {
-  const { images, title, price } = route.params;
+  const listing = route.params;
+  const { images, title, price } = listing;
 
   return (
-    <View style={styles.baseContainer}>
-      <Image
-        uri={images[0].url}
-        preview={{ uri: images[0].thumbnailUrl }}
-        tint="light"
-        style={styles.image}
-      />
-      <View style={styles.detailsContainer}>
-        <AppText style={styles.title}>{title}</AppText>
-        <AppText style={styles.price}>
-          $
-          {price}
-        </AppText>
-        <View style={styles.buttonContainer}>
-          <AppButton title="Add to cart" />
+    <KeyboardAvoidingView
+      style={styles.baseContainer}
+      behavior="position"
+      keyboardVericalOffset={Platform.OS === 'ios' ? 0 : 100}
+    >
+      <ScrollView>
+        <Image
+          uri={images[0].url}
+          preview={{ uri: images[0].thumbnailUrl }}
+          tint="light"
+          style={styles.image}
+        />
+        <View style={styles.detailsContainer}>
+          <AppText style={styles.title}>{title}</AppText>
+          <AppText style={styles.price}>
+            $
+            {price}
+          </AppText>
+          <View style={styles.userContainer}>
+            <ListItem
+              image={require('../assets/user.jpg')}
+              title="John Smith"
+              subTitle="5 Listing"
+            />
+          </View>
+          <ContactSellerForm listing={listing} />
         </View>
-        <View style={styles.userContainer}>
-          <ListItem
-            image={require('../assets/img/user.jpg')}
-            title="John Smith"
-            subTitle="5 Listing"
-          />
-        </View>
-      </View>
-    </View>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -51,14 +58,11 @@ const styles = StyleSheet.create({
   },
   image: {
     width: '100%',
-    height: 300,
+    height: 250,
   },
   title: {
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: '500',
-  },
-  buttonContainer: {
-    marginTop: 10,
   },
   price: {
     color: colors.secondary,
@@ -67,7 +71,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   userContainer: {
-    marginVertical: 10,
+    marginVertical: 5,
   },
 });
 
